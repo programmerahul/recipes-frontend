@@ -1,9 +1,9 @@
 import "./App.css";
-import Movie from "./components/movies";
+import Pagination from "./components/common/pagination";
 function App() {
   return (
     <main className="container">
-      <Movie />
+      <Pagination />
     </main>
   );
 }
