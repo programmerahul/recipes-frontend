@@ -17,6 +17,7 @@ class Movie extends Component {
     movies[index].like = !movies[index].like;
     this.setState({ movies });
   };
+
   render() {
     const { length: count } = this.state.movies;
     if (count === 0) {
@@ -37,28 +38,34 @@ class Movie extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map((mov) => (
-              <tr key={mov._id}>
-                <td>{mov.title}</td>
-                <td>{mov.genre.name}</td>
-                <td>{mov.numberInStock}</td>
-                <td>{mov.dailyRentalRate}</td>
-                <td>
-                  <Like
-                    Liked={mov.like}
-                    onClick={() => this.handleClick(mov)}
-                  />
-                </td>
-                <td>
-                  <button
-                    onClick={() => this.handleDelete(mov._id)}
-                    className="btn btn-danger btn-sm"
-                  >
-                    delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {this.state.movies
+              .filter(
+                (mov) =>
+                  this.state.movies.indexOf(mov) >= this.props.start &&
+                  this.state.movies.indexOf(mov) <= this.props.end
+              )
+              .map((mov) => (
+                <tr key={mov._id}>
+                  <td>{mov.title}</td>
+                  <td>{mov.genre.name}</td>
+                  <td>{mov.numberInStock}</td>
+                  <td>{mov.dailyRentalRate}</td>
+                  <td>
+                    <Like
+                      Liked={mov.like}
+                      onClick={() => this.handleClick(mov)}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => this.handleDelete(mov._id)}
+                      className="btn btn-danger btn-sm"
+                    >
+                      delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </React.Fragment>
