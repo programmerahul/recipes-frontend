@@ -1,11 +1,10 @@
 import "./App.css";
-import Pagination from "./components/common/pagination";
+import Movie from "./components/movies";
 function App() {
   return (
     <main className="container">
-      <Pagination />
+      <Movie />
     </main>
   );
 }
-
 export default App;
