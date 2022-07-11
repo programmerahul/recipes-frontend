@@ -6,6 +6,7 @@ import ListGroup from "./common/listGroup";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 class Movie extends Component {
   state = {
     movies: [],
