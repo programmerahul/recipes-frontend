@@ -7,9 +7,17 @@ class MoviesTable extends Component {
     {
       path: "title",
       label: "Title",
-      content: (movie) => (
-        <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
-      ),
+      content: (movie) => {
+        const newTo = {
+          pathname: `/movies/${movie._id}`,
+          movie: movie,
+        };
+        return (
+          <Link params={{ hah: "ra" }} to={newTo}>
+            {movie.title}
+          </Link>
+        );
+      },
     },
     { path: "genre.name", label: "Genre" },
     { path: "numberInStock", label: "Stock" },
