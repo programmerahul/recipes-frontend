@@ -5,6 +5,7 @@ import { Paginate } from "../utils/paginate";
 import ListGroup from "./common/listGroup";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
+import SearchBar from "./common/searchBar";
 import _ from "lodash";
 class Movie extends Component {
   state = {
@@ -13,6 +14,7 @@ class Movie extends Component {
     pageSize: 4,
     currentPage: 1,
     currentGenre: "",
+    searchItem: "",
     sortColumn: { path: "title", order: "asc" },
   };
   componentDidMount() {
@@ -20,7 +22,7 @@ class Movie extends Component {
     this.setState({ movies: getMovies(), genre });
   }
   handleItemSelect = (genre) => {
-    this.setState({ currentGenre: genre, currentPage: 1 });
+    this.setState({ currentGenre: genre, currentPage: 1, searchItem: "" });
   };
   handleDelete = (id) => {
     const movies = this.state.movies.filter((m) => m._id !== id);
@@ -42,18 +44,33 @@ class Movie extends Component {
   handleNewMovie = () => {
     this.props.history.push("/movies/new");
   };
+  handleSearch = (searchItem) => {
+    this.setState({
+      searchItem,
+      currentGenre: "",
+      currentPage: 1,
+    });
+  };
   getPagedData = () => {
     const {
       pageSize,
       currentPage,
       movies: allMovies,
-      currentGenre,
       sortColumn,
+      currentGenre,
+      searchItem,
     } = this.state;
-    const filtered =
-      currentGenre && currentGenre._id
-        ? allMovies.filter((mov) => mov.genre._id === currentGenre._id)
-        : allMovies;
+    let filtered = allMovies;
+    if (searchItem) {
+      filtered = filtered.filter(
+        (m) => m.title.toLowerCase().indexOf(searchItem.toLowerCase()) === 0
+      );
+    } else {
+      filtered =
+        currentGenre && currentGenre._id
+          ? allMovies.filter((mov) => mov.genre._id === currentGenre._id)
+          : allMovies;
+    }
     const { length: count } = filtered;
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
     const movies = Paginate(sorted, currentPage, pageSize);
@@ -85,6 +102,10 @@ class Movie extends Component {
             New Movie
           </button>
           <p>Showing {totalCount} movies in database</p>
+          <SearchBar
+            onChange={this.handleSearch}
+            value={this.state.searchItem}
+          />
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}
