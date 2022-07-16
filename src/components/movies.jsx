@@ -77,7 +77,11 @@ class Movie extends Component {
           />
         </div>
         <div className="col">
-          <button onClick={this.handleNewMovie} className="btn btn-primary">
+          <button
+            style={{ marginBottom: 20 }}
+            onClick={this.handleNewMovie}
+            className="btn btn-primary"
+          >
             New Movie
           </button>
           <p>Showing {totalCount} movies in database</p>

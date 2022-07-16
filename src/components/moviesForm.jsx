@@ -34,7 +34,7 @@ class MoviesForm extends Form {
     const { _id } = this.props.match.params;
     if (_id !== "new") movie._id = _id;
     saveMovie(movie);
-    this.props.history.replace("/movies");
+    this.props.history.push("/movies");
   };
   schema = {
     title: Joi.string().required().label("Title"),
