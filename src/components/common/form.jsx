@@ -15,31 +15,12 @@ class Form extends Component {
       errors[item.path[0]] = item.message;
     }
     return errors;
-    // const error = {};
-    // const { data } = this.state;
-    // if (data.username.trim() === "") {
-    //   error.username = "username is required";
-    // }
-    // if (data.password.trim() === "") {
-    //   error.password = "Password is required";
-    // }
-    // return Object.keys(error).length === 0 ? null : error;
   };
   validateProperty = ({ value, name }) => {
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
     const { error } = Joi.validate(obj, schema);
     return error ? error.details[0].message : null;
-    // if (name === "username") {
-    //   if (value.trim() === "") {
-    //     return "Username is required";
-    //   }
-    // }
-    // if (name === "password") {
-    //   if (value.trim() === "") {
-    //     return "password is required";
-    //   }
-    // }
   };
   handleSubmit = (event) => {
     event.preventDefault();
@@ -80,6 +61,38 @@ class Form extends Component {
         value={data[name]}
         onChange={this.handleChange}
       />
+    );
+  }
+  renderSelect(selected, label, handleSelectChange) {
+    return (
+      <div className="form-group">
+        <label htmlFor="SelectInput">{label}</label>
+        <select
+          onChange={handleSelectChange}
+          className="form-control"
+          id="SelectInput"
+        >
+          <option selected={selected === ""} value=""></option>
+          <option
+            selected={selected === "5b21ca3eeb7f6fbccd471818"}
+            value="5b21ca3eeb7f6fbccd471818"
+          >
+            Action
+          </option>
+          <option
+            selected={selected === "5b21ca3eeb7f6fbccd471814"}
+            value="5b21ca3eeb7f6fbccd471814"
+          >
+            Comedy
+          </option>
+          <option
+            selected={selected === "5b21ca3eeb7f6fbccd471820"}
+            value="5b21ca3eeb7f6fbccd471820"
+          >
+            Thriller
+          </option>
+        </select>
+      </div>
     );
   }
 }

@@ -8,7 +8,6 @@ const movies = [
     numberInStock: 6,
     dailyRentalRate: 2.5,
     publishDate: "2018-01-03T19:04:28.809Z",
-    like: true,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471816",
@@ -16,7 +15,6 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
     numberInStock: 5,
     dailyRentalRate: 2.5,
-    like: true,
   },
   {
     _id: "5b21ca3eeb7f6fbccd471817",
@@ -38,7 +36,6 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
     numberInStock: 7,
     dailyRentalRate: 3.5,
-    like: true,
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181b",
@@ -86,9 +83,10 @@ export function saveMovie(movie) {
   movieInDb.dailyRentalRate = movie.dailyRentalRate;
 
   if (!movieInDb._id) {
-    movieInDb._id = movie._id;
+    movieInDb._id = String(Date.now());
     movies.push(movieInDb);
   }
+
   return movieInDb;
 }
 

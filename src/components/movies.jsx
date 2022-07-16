@@ -40,8 +40,7 @@ class Movie extends Component {
     this.setState({ sortColumn });
   };
   handleNewMovie = () => {
-    const newMovie_id = Date.now();
-    this.props.history.push(`/movies/${newMovie_id}`);
+    this.props.history.push("/movies/new");
   };
   getPagedData = () => {
     const {
