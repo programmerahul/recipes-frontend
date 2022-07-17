@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./input";
 import Joi from "joi-browser";
+
 class Form extends Component {
   state = {
     data: {},
@@ -63,7 +64,7 @@ class Form extends Component {
       />
     );
   }
-  renderSelect(selected, label, handleSelectChange) {
+  renderSelect(selected, label, handleSelectChange, data) {
     return (
       <div className="form-group">
         <label htmlFor="SelectInput">{label}</label>
@@ -72,25 +73,12 @@ class Form extends Component {
           className="form-control"
           id="SelectInput"
         >
-          <option selected={selected === ""} value=""></option>
-          <option
-            selected={selected === "5b21ca3eeb7f6fbccd471818"}
-            value="5b21ca3eeb7f6fbccd471818"
-          >
-            Action
-          </option>
-          <option
-            selected={selected === "5b21ca3eeb7f6fbccd471814"}
-            value="5b21ca3eeb7f6fbccd471814"
-          >
-            Comedy
-          </option>
-          <option
-            selected={selected === "5b21ca3eeb7f6fbccd471820"}
-            value="5b21ca3eeb7f6fbccd471820"
-          >
-            Thriller
-          </option>
+          <option key={"none"} selected={selected === ""} value={""}></option>
+          {data.map((g) => (
+            <option key={g._id} selected={selected === g._id} value={g._id}>
+              {g.name}
+            </option>
+          ))}
         </select>
       </div>
     );

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
+import { getMovies, deleteMovie } from "../services/movieService";
 import Pagination from "./common/pagination";
 import { Paginate } from "../utils/paginate";
 import ListGroup from "./common/listGroup";
-import { getGenres } from "../services/fakeGenreService";
+import { getGenres } from "../services/genreService";
 import MoviesTable from "./moviesTable";
 import SearchBar from "./common/searchBar";
 import _ from "lodash";
@@ -17,16 +17,18 @@ class Movie extends Component {
     searchItem: "",
     sortColumn: { path: "title", order: "asc" },
   };
-  componentDidMount() {
-    const genre = [{ name: "All Genre", _id: "" }, ...getGenres()];
-    this.setState({ movies: getMovies(), genre });
+  async componentDidMount() {
+    const genres = await getGenres();
+    const genre = [{ name: "All Genre", _id: "" }, ...genres];
+    this.setState({ movies: await getMovies(), genre });
   }
   handleItemSelect = (genre) => {
     this.setState({ currentGenre: genre, currentPage: 1, searchItem: "" });
   };
-  handleDelete = (id) => {
+  handleDelete = async (id) => {
     const movies = this.state.movies.filter((m) => m._id !== id);
     this.setState({ movies });
+    await deleteMovie(id);
   };
   handleClick = (movie) => {
     const movies = [...this.state.movies];
@@ -81,9 +83,6 @@ class Movie extends Component {
     const { pageSize, currentPage, currentGenre, sortColumn, genre } =
       this.state;
     const { data: movies, totalCount } = this.getPagedData();
-    if (totalCount === 0) {
-      return <p>There are no movies in database</p>;
-    }
     return (
       <div className="row">
         <div className="col-2">
