@@ -29,7 +29,7 @@ export async function saveMovie(movie) {
 
 export async function deleteMovie(id) {
   const { data: movieInDb } = await httpServices.delete(
-    config.moviesApiEndPoint + "/" + id
+    "a" + config.moviesApiEndPoint + "/" + id
   );
   return movieInDb;
 }
