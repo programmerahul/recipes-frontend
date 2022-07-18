@@ -11,13 +11,19 @@ class MoviesForm extends Form {
     genres: [],
   };
   async componentDidMount() {
-    const genres = await getGenres();
+    const { data: genres } = await getGenres();
     this.setState({ genres });
     const { _id } = this.props.match.params;
+
     if (_id !== "new") {
-      const movie = await getMovie(_id);
-      if (!movie) {
-        this.props.history.replace("/notFound");
+      let movie = {};
+      try {
+        const { data } = await getMovie(_id);
+        movie = data;
+      } catch (ex) {
+        if (ex.response && ex.response.status === 404) {
+          this.props.history.replace("/notFound");
+        }
         return;
       }
       const data = {

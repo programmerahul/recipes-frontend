@@ -7,6 +7,7 @@ import { getGenres } from "../services/genreService";
 import MoviesTable from "./moviesTable";
 import SearchBar from "./common/searchBar";
 import _ from "lodash";
+import { toast } from "react-toastify";
 class Movie extends Component {
   state = {
     movies: [],
@@ -18,7 +19,7 @@ class Movie extends Component {
     sortColumn: { path: "title", order: "asc" },
   };
   async componentDidMount() {
-    const genres = await getGenres();
+    const { data: genres } = await getGenres();
     const genre = [{ name: "All Genre", _id: "" }, ...genres];
     this.setState({ movies: await getMovies(), genre });
   }
@@ -26,9 +27,17 @@ class Movie extends Component {
     this.setState({ currentGenre: genre, currentPage: 1, searchItem: "" });
   };
   handleDelete = async (id) => {
-    const movies = this.state.movies.filter((m) => m._id !== id);
+    const originalMovies = this.state.movies;
+    const movies = originalMovies.filter((m) => m._id !== id);
     this.setState({ movies });
-    await deleteMovie(id);
+    try {
+      await deleteMovie(id);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        toast.error("This movies is already deleted!");
+      }
+      this.setState({ movies: originalMovies });
+    }
   };
   handleClick = (movie) => {
     const movies = [...this.state.movies];
