@@ -2,6 +2,10 @@ import http from "./httpServices";
 import conf from "../conf.json";
 import jwtDecode from "jwt-decode";
 const tokenKey = "token";
+export function getJwt() {
+  return localStorage.getItem(tokenKey);
+}
+http.setJwt(getJwt());
 export async function login(u) {
   const user = {};
   const { username, password } = u;
@@ -28,4 +32,5 @@ export default {
   loginWithJwt,
   logout,
   getCurrentUser,
+  getJwt,
 };
