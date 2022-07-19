@@ -92,6 +92,7 @@ class Movie extends Component {
     const { pageSize, currentPage, currentGenre, sortColumn, genre } =
       this.state;
     const { data: movies, totalCount } = this.getPagedData();
+    const { user } = this.props;
     return (
       <div className="row">
         <div className="col-2">
@@ -102,13 +103,15 @@ class Movie extends Component {
           />
         </div>
         <div className="col">
-          <button
-            style={{ marginBottom: 20 }}
-            onClick={this.handleNewMovie}
-            className="btn btn-primary"
-          >
-            New Movie
-          </button>
+          {user && (
+            <button
+              style={{ marginBottom: 20 }}
+              onClick={this.handleNewMovie}
+              className="btn btn-primary"
+            >
+              New Movie
+            </button>
+          )}
           <p>Showing {totalCount} movies in database</p>
           <SearchBar
             onChange={this.handleSearch}
