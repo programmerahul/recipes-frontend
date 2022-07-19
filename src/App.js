@@ -11,24 +11,32 @@ import MoviesForm from "./components/moviesForm";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import { ToastContainer } from "react-toastify";
-import jwt from "jwt-decode";
+import auth from "./services/authService";
+import Logout from "./components/logout";
 class App extends Component {
-  state = {};
+  state = {
+    user: null,
+  };
+  componentDidMount() {
+    const user = auth.getCurrentUser();
+    this.setState({ user });
+  }
   render() {
     return (
       <React.Fragment>
         <ToastContainer />
-        <NavBar />
+        <NavBar user={this.state.user} />
         <main className="container">
           <Switch>
+            <Route path="/logout" component={Logout} />
             <Route path="/movies/:_id" component={MoviesForm} />
             <Route path="/movies" component={Movie} />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
-            <Route path="/notFound" component={NotFound} />
             <Redirect from="/" exact to="/movies" />
+            <Route path="/notFound" component={NotFound} />
             <Redirect to="/notFound"></Redirect>
           </Switch>
         </main>
