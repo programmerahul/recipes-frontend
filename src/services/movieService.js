@@ -1,14 +1,13 @@
 import httpServices from "./httpServices";
-import config from "../conf.json";
-
+const url = "/movies";
 export async function getMovies() {
-  const { data: movies } = await httpServices.get(config.moviesApiEndPoint);
+  const { data: movies } = await httpServices.get(url);
 
   return movies;
 }
 
 export function getMovie(id) {
-  return httpServices.get(config.moviesApiEndPoint + "/" + id);
+  return httpServices.get(url + "/" + id);
 }
 
 export async function saveMovie(movie) {
@@ -17,19 +16,14 @@ export async function saveMovie(movie) {
   if (movie._id) {
     const id = movie._id;
     delete movie._id;
-    movieInDb = await httpServices.put(
-      config.moviesApiEndPoint + "/" + id,
-      movie
-    ).data;
+    movieInDb = await httpServices.put(url + "/" + id, movie).data;
   } else {
-    movieInDb = await httpServices.post(config.moviesApiEndPoint, movie).data;
+    movieInDb = await httpServices.post(url, movie).data;
   }
   return movieInDb;
 }
 
 export async function deleteMovie(id) {
-  const { data: movieInDb } = await httpServices.delete(
-    config.moviesApiEndPoint + "/" + id
-  );
+  const { data: movieInDb } = await httpServices.delete(url + "/" + id);
   return movieInDb;
 }
