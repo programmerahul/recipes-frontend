@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
-
+import pic from "./logo.png";
 class NavBar extends Component {
   render() {
     const { user } = this.props;
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          Vildy
+          <img src={pic} />
         </Link>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">

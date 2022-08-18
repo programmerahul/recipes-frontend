@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import "./App.css";
 import Movie from "./components/movies";
 import NavBar from "./components/navBar";
-import Customers from "./components/customers";
-import Rentals from "./components/rentals";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./components/common/notFound";
 import MoviesForm from "./components/moviesForm";
@@ -38,8 +36,6 @@ class App extends Component {
             />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
-            <Route path="/customers" component={Customers} />
-            <Route path="/rentals" component={Rentals} />
             <Redirect from="/" exact to="/movies" />
             <Route path="/notFound" component={NotFound} />
             <Redirect to="/notFound"></Redirect>
