@@ -5,12 +5,24 @@ class NavBar extends Component {
   render() {
     const { user } = this.props;
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav
+        className="navbar navbar-expand-lg navbar-light"
+        style={{ backgroundColor: "#87c9c4" }}
+      >
         <Link className="navbar-brand" to="/">
           <img src={pic} />
         </Link>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
+            {user && (
+              <React.Fragment>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/profile">
+                    <span className="badge badge-info">Hi {user.name}</span>
+                  </NavLink>
+                </li>
+              </React.Fragment>
+            )}
             <li className="nav-item">
               <NavLink className="nav-link" to="/movies">
                 Movies
@@ -30,13 +42,9 @@ class NavBar extends Component {
                 </li>
               </React.Fragment>
             )}
+            {console.log(user)}
             {user && (
               <React.Fragment>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/profile">
-                    {user.name}
-                  </NavLink>
-                </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/logout">
                     Logout
