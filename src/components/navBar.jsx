@@ -6,7 +6,7 @@ class NavBar extends Component {
     const { user } = this.props;
     return (
       <nav
-        className="navbar navbar-expand-lg navbar-light"
+        className="navbar navbar-expand-lg navbar-light py-0"
         style={{ backgroundColor: "#87c9c4" }}
       >
         <Link className="navbar-brand" to="/">
@@ -18,7 +18,9 @@ class NavBar extends Component {
               <React.Fragment>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/profile">
-                    <span className="badge badge-info">Hi {user.name}</span>
+                    <span className="badge badge-info badge-pill p-2">
+                      Hi {user.name}
+                    </span>
                   </NavLink>
                 </li>
               </React.Fragment>
@@ -42,7 +44,6 @@ class NavBar extends Component {
                 </li>
               </React.Fragment>
             )}
-            {console.log(user)}
             {user && (
               <React.Fragment>
                 <li className="nav-item">
