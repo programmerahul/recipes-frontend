@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import pic from "./logo.png";
+import background from "../components/navbarImage.png";
 class NavBar extends Component {
   render() {
     const { user } = this.props;
     return (
-      <nav
-        className="navbar navbar-expand-lg navbar-light py-0"
-        style={{ backgroundColor: "#87c9c4" }}
-      >
+      <nav className="navbar navbar-expand-lg navbar-light py-0 shadow-5-strong navBarGradient">
         <Link className="navbar-brand" to="/">
           <img src={pic} />
         </Link>

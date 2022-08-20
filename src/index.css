@@ -24,3 +24,26 @@ code {
   background-size: cover;
   background-position: center;
 }
+.navBarGradient {
+  background: hsla(216, 99%, 26%, 1);
+
+  background: linear-gradient(
+    180deg,
+    hsla(216, 99%, 26%, 1) 0%,
+    hsla(44, 25%, 88%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    180deg,
+    hsla(216, 99%, 26%, 1) 0%,
+    hsla(44, 25%, 88%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    180deg,
+    hsla(216, 99%, 26%, 1) 0%,
+    hsla(44, 25%, 88%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#013686", endColorstr="#E8E4D9", GradientType=1 );
+}
