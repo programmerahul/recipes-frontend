@@ -47,3 +47,8 @@ code {
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#013686", endColorstr="#E8E4D9", GradientType=1 );
 }
+.formWidth {
+  padding-left: 25%;
+  padding-top: 5%;
+  width: 70%;
+}

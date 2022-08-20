@@ -13,11 +13,6 @@ class LoginForm extends Form {
     username: Joi.string().required().label("Username"),
     password: Joi.string().required().label("Password"),
   };
-  //username = React.createRef();
-  //   componentDidMount() {
-  //     this.username.current.focus();
-  //   }
-  // add to input field : ref={this.username}
 
   doSubmit = async () => {
     try {
@@ -38,7 +33,7 @@ class LoginForm extends Form {
       return <Redirect to="/" />;
     }
     return (
-      <div>
+      <div className="formWidth">
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import pic from "./logo.png";
-import background from "../components/navbarImage.png";
 class NavBar extends Component {
   render() {
     const { user } = this.props;
