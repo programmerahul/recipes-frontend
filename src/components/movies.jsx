@@ -12,7 +12,7 @@ class Movie extends Component {
   state = {
     movies: [],
     genre: [],
-    pageSize: 4,
+    pageSize: 5,
     currentPage: 1,
     currentGenre: "",
     searchItem: "",
@@ -21,7 +21,8 @@ class Movie extends Component {
   async componentDidMount() {
     const { data: genres } = await getGenres();
     const genre = [{ name: "All Genre", _id: "" }, ...genres];
-    this.setState({ movies: await getMovies(), genre });
+    const currentGenre = { name: "All Genre", _id: "" };
+    this.setState({ movies: await getMovies(), genre, currentGenre });
   }
   handleItemSelect = (genre) => {
     this.setState({ currentGenre: genre, currentPage: 1, searchItem: "" });
@@ -92,7 +93,6 @@ class Movie extends Component {
     const { pageSize, currentPage, currentGenre, sortColumn, genre } =
       this.state;
     const { data: movies, totalCount } = this.getPagedData();
-    const { user } = this.props;
     return (
       <div className="row">
         <div className="col-2">
@@ -103,15 +103,15 @@ class Movie extends Component {
           />
         </div>
         <div className="col">
-          {user && (
+          {
             <button
               style={{ marginBottom: 20 }}
               onClick={this.handleNewMovie}
-              className="btn btn-primary"
+              className="btn  btn-primary"
             >
               New Movie
             </button>
-          )}
+          }
           <p>Showing {totalCount} movies in database</p>
           <SearchBar
             onChange={this.handleSearch}
