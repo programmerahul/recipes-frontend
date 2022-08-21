@@ -13,8 +13,8 @@ class MoviesTable extends Component {
       },
     },
     { path: "genre.name", label: "Genre" },
-    { path: "numberInStock", label: "Stock" },
-    { path: "dailyRentalRate", label: "Rate" },
+    { path: "numberInStock", label: "Type" },
+    { path: "dailyRentalRate", label: "Rating" },
     {
       key: "like",
       content: (movie) => (
@@ -33,10 +33,36 @@ class MoviesTable extends Component {
       </button>
     ),
   };
+  watchMovie = {
+    key: "delete",
+    content: (movie) => (
+      <button
+        onClick={() => this.props.onDelete(movie._id)}
+        className="btn btn-outline-info btn-sm "
+      >
+        <i className="fa fa-eye mr-1" aria-hidden="true"></i>
+        watch
+      </button>
+    ),
+  };
+  downloadMovie = {
+    key: "delete",
+    content: (movie) => (
+      <button
+        onClick={() => this.props.onDelete(movie._id)}
+        className="btn btn-outline-success btn-sm "
+      >
+        <i className="fa fa-download mr-1" aria-hidden="true"></i>
+        download
+      </button>
+    ),
+  };
   constructor() {
     super();
     const user = auth.getCurrentUser();
     if (user && user.isAdmin) this.columns.push(this.deleteMovie);
+    this.columns.push(this.watchMovie);
+    this.columns.push(this.downloadMovie);
   }
   render() {
     const { movies, onSort, sortColumn } = this.props;

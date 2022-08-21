@@ -12,7 +12,7 @@ class Movie extends Component {
   state = {
     movies: [],
     genre: [],
-    pageSize: 5,
+    pageSize: 4,
     currentPage: 1,
     currentGenre: "",
     searchItem: "",
@@ -109,7 +109,8 @@ class Movie extends Component {
               onClick={this.handleNewMovie}
               className="btn  btn-primary"
             >
-              New Movie
+              <i className="fa fa-upload mr-1" aria-hidden="true"></i>
+              Upload
             </button>
           }
           <p>Showing {totalCount} movies in database</p>
