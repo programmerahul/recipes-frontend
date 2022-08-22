@@ -6,6 +6,7 @@ import ListGroup from "./common/listGroup";
 import { getGenres } from "../services/genreService";
 import MoviesTable from "./moviesTable";
 import SearchBar from "./common/searchBar";
+import { saveMovie } from "../services/movieService";
 import _ from "lodash";
 import { toast } from "react-toastify";
 class Movie extends Component {
@@ -44,7 +45,13 @@ class Movie extends Component {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
     movies[index] = { ...movies[index] };
+    if (movies[index].like) {
+      movies[index].numberInStock--;
+    } else {
+      movies[index].numberInStock++;
+    }
     movies[index].like = !movies[index].like;
+    saveMovie(movies[index]);
     this.setState({ movies });
   };
   handlePageChange = (page) => {

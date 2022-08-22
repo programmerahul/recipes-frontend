@@ -9,12 +9,12 @@ class MoviesTable extends Component {
       path: "title",
       label: "Title",
       content: (movie) => {
-        return <Link to={`/movies/${movie._id}`}>{movie.title}</Link>;
+        return movie.title;
       },
     },
     { path: "genre.name", label: "Genre" },
-    { path: "numberInStock", label: "Type" },
     { path: "dailyRentalRate", label: "Rating" },
+    { path: "numberInStock", label: "Likes" },
     {
       key: "like",
       content: (movie) => (
@@ -34,19 +34,18 @@ class MoviesTable extends Component {
     ),
   };
   watchMovie = {
-    key: "delete",
+    key: "watch",
     content: (movie) => (
-      <button
-        onClick={() => this.props.onDelete(movie._id)}
-        className="btn btn-outline-info btn-sm "
-      >
-        <i className="fa fa-eye mr-1" aria-hidden="true"></i>
-        watch
-      </button>
+      <Link to={`/movies/${movie._id}`}>
+        <button className="btn btn-outline-info btn-sm ">
+          <i className="fa fa-eye mr-1" aria-hidden="true"></i>
+          watch
+        </button>
+      </Link>
     ),
   };
   downloadMovie = {
-    key: "delete",
+    key: "download",
     content: (movie) => (
       <button
         onClick={() => this.props.onDelete(movie._id)}
