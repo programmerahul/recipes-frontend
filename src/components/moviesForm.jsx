@@ -71,6 +71,7 @@ class MoviesForm extends Form {
           )}
           {this.renderInput("numberInStock", "Number in Stock")}
           {this.renderInput("dailyRentalRate", "Rate")}
+
           {this.renderButton("Save")}
         </form>
       </div>

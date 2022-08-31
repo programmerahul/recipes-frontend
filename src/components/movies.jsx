@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getMovies, deleteMovie } from "../services/movieService";
+import { getMovies, deleteMovie, getVideos } from "../services/movieService";
 import Pagination from "./common/pagination";
 import { Paginate } from "../utils/paginate";
 import ListGroup from "./common/listGroup";
@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 class Movie extends Component {
   state = {
     movies: [],
+    vidoes: [],
     genre: [],
     pageSize: 4,
     currentPage: 1,
@@ -23,7 +24,8 @@ class Movie extends Component {
     const { data: genres } = await getGenres();
     const genre = [{ name: "All Genre", _id: "" }, ...genres];
     const currentGenre = { name: "All Genre", _id: "" };
-    this.setState({ movies: await getMovies(), genre, currentGenre });
+    const { data: videos } = await getVideos();
+    this.setState({ movies: await getMovies(), videos, genre, currentGenre });
   }
   handleItemSelect = (genre) => {
     this.setState({ currentGenre: genre, currentPage: 1, searchItem: "" });
@@ -61,7 +63,7 @@ class Movie extends Component {
     this.setState({ sortColumn });
   };
   handleNewMovie = () => {
-    this.props.history.push("/movies/new");
+    this.props.history.push("/video");
   };
   handleSearch = (searchItem) => {
     this.setState({
