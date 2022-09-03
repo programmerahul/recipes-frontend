@@ -14,6 +14,7 @@ import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
 import background from "./components/background.jpg";
 import VideoForm from "./components/videoForm";
+import DisplayVideo from "./components/displayVideo";
 
 class App extends Component {
   state = {
@@ -41,6 +42,7 @@ class App extends Component {
                 path="/movies"
                 render={(props) => <Movie {...props} user={this.state.user} />}
               />
+              <Route path="/video/:_id" component={DisplayVideo} />
               <Route path="/video" component={VideoForm} />
               <Route path="/login" component={LoginForm} />
               <Route path="/register" component={RegisterForm} />

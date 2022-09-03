@@ -36,7 +36,7 @@ class MoviesTable extends Component {
   watchMovie = {
     key: "watch",
     content: (movie) => (
-      <Link to={`/movies/${movie._id}`}>
+      <Link to={`/video/${movie._id}`}>
         <button className="btn btn-outline-info btn-sm ">
           <i className="fa fa-eye mr-1" aria-hidden="true"></i>
           watch
