@@ -14,7 +14,7 @@ class NavBar extends Component {
             {user && (
               <React.Fragment>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/profile">
+                  <NavLink className="nav-link" to="/recipes">
                     <span className="badge badge-info badge-pill p-2">
                       Hi {user.name}
                     </span>
@@ -23,8 +23,8 @@ class NavBar extends Component {
               </React.Fragment>
             )}
             <li className="nav-item">
-              <NavLink className="nav-link" to="/movies">
-                Movies
+              <NavLink className="nav-link" to="/recipes">
+                Recipes
               </NavLink>
             </li>
             {!user && (

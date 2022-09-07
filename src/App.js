@@ -1,21 +1,19 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import React, { Component } from "react";
 import "./App.css";
-import Movie from "./components/movies";
 import NavBar from "./components/navBar";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./components/common/notFound";
-import MoviesForm from "./components/moviesForm";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import { ToastContainer } from "react-toastify";
 import auth from "./services/authService";
 import Logout from "./components/logout";
-import ProtectedRoute from "./components/common/protectedRoute";
 import background from "./components/background.jpg";
-import VideoForm from "./components/videoForm";
-import DisplayVideo from "./components/displayVideo";
-
+import Recipe from "./components/recipe";
+import OneRecipe from "./components/onerecipe";
+import NewRecipe from "./components/newRecipe";
+import MyRecipe from "./components/myRecipes";
 class App extends Component {
   state = {
     user: null,
@@ -37,16 +35,37 @@ class App extends Component {
           <main className="container">
             <Switch>
               <Route path="/logout" component={Logout} />
-              <ProtectedRoute path="/movies/:_id" component={MoviesForm} />
               <Route
-                path="/movies"
-                render={(props) => <Movie {...props} user={this.state.user} />}
+                path="/new/:id"
+                render={(props) => (
+                  <NewRecipe {...props} user={this.state.user} />
+                )}
               />
-              <Route path="/video/:_id" component={DisplayVideo} />
-              <Route path="/video" component={VideoForm} />
+              <Route
+                path="/new"
+                render={(props) => (
+                  <NewRecipe {...props} user={this.state.user} />
+                )}
+              />
+              <Route
+                path="/myrecipe"
+                render={(props) => (
+                  <MyRecipe {...props} user={this.state.user} />
+                )}
+              />
+              <Route
+                path="/recipes/:id"
+                render={(props) => (
+                  <OneRecipe {...props} user={this.state.user} />
+                )}
+              />
+              <Route
+                path="/recipes"
+                render={(props) => <Recipe {...props} user={this.state.user} />}
+              />
               <Route path="/login" component={LoginForm} />
               <Route path="/register" component={RegisterForm} />
-              <Redirect from="/" exact to="/movies" />
+              <Redirect from="/" exact to="/register" />
               <Route path="/notFound" component={NotFound} />
               <Redirect to="/notFound"></Redirect>
             </Switch>
