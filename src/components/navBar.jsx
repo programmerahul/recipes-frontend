@@ -9,7 +9,7 @@ class NavBar extends Component {
         <Link className="navbar-brand" to="/">
           <img src={pic} />
         </Link>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="barHeight" id="navbarNav" >
           <ul className="navbar-nav">
             {user && (
               <React.Fragment>
