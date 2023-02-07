@@ -23,7 +23,7 @@ class RegisterForm extends Form {
     }
   };
   schema = {
-    username: Joi.string().required().label("Username").email(),
+    username: Joi.string().required().label("Email").email(),
     password: Joi.string().min(5).required().label("Password"),
     name: Joi.string().required().label("Name"),
   };
@@ -32,7 +32,7 @@ class RegisterForm extends Form {
       <div className="formWidth">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Username", "email")}
+          {this.renderInput("username", "Email", "email")}
           {this.renderInput("password", "Password", "password")}
           {this.renderInput("name", "Name")}
           {this.renderButton("Register")}
